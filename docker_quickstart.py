@@ -7,7 +7,7 @@ import time
 
 instaUser = ['schoennyc']#, 'stal_style']
 instaPass = ['theman']#, 'Dylan9790']
-smartTags = [['a7sii', 'a7s', 'rokinon', 'sonyalpha', 'atomos', 'film', '35mm'], ['styledbystal', 'style', 'stylist', 'ootd', 'fashion', 'nycstylist', 'nycstyle', 'lookbook', 'fashiongram', 'wiwt', 'lookoftheday', 'stylish', 'streetstyle', 'instastyle', 'styleinspiration', 'empower', 'women', 'instafashion', 'fashionblogger', 'fashionista', 'streetstyle', 'stylish', 'mensfashion', 'instastyle', 'lookbook', 'whatiwore', 'styleinspo', 'styleblogger']]
+smartTags = [['a7sii', 'a7s', 'rokinon', 'sonyalpha', 'atomos', 'film', '35mm']]#, ['styledbystal', 'style', 'stylist', 'ootd', 'fashion', 'nycstylist', 'nycstyle', 'lookbook', 'fashiongram', 'wiwt', 'lookoftheday', 'stylish', 'streetstyle', 'instastyle', 'styleinspiration', 'empower', 'women', 'instafashion', 'fashionblogger', 'fashionista', 'streetstyle', 'stylish', 'mensfashion', 'instastyle', 'lookbook', 'whatiwore', 'styleinspo', 'styleblogger']]
 
 def worker(selection):
     
