@@ -1,33 +1,34 @@
+import random 
 from instapy import InstaPy
+import os
+import multiprocessing
+import datetime
+import time
 
-# Write your automation here
-# Stuck ? Look at the github page or the examples in the examples folder
+instaUser = ['schoennyc', 'stal_style']
+instaPass = ['theman', 'Dylan9790']
+smartTags = [['a7sii', 'a7s', 'rokinon', 'sonyalpha', 'atomos', 'film', '35mm'], ['styledbystal', 'style', 'stylist', 'ootd', 'fashion', 'nycstylist', 'nycstyle', 'lookbook', 'fashiongram', 'wiwt', 'lookoftheday', 'stylish', 'streetstyle', 'instastyle', 'styleinspiration', 'empower', 'women', 'instafashion', 'fashionblogger', 'fashionista', 'streetstyle', 'stylish', 'mensfashion', 'instastyle', 'lookbook', 'whatiwore', 'styleinspo', 'styleblogger']]
 
-insta_username = ''
-insta_password = ''
+def worker(selection):
+    
+    print("MULTI - Started as",instaUser[selection],"at",datetime.datetime.now().strftime("%H:%M:%S"))
+    session = InstaPy(username=instaUser[selection], password=instaPass[selection], selenium_local_session=False)
+    session.set_selenium_remote_session(selenium_url='http://selenium:4444/wd/hub')
+    session.login()
+   
+    if smartTags[selection]:
+        session.set_smart_hashtags(smartTags[selection], limit=3, sort='top', log_tags=True)
+        session.like_by_tags(amount=random.randint(2,5), use_smart_hashtags=True)
+        print("MULTI -",instaUser[selection],"finished smartTags at",datetime.datetime.now().strftime("%H:%M:%S"))
 
-dont_like = ['food', 'girl', 'hot']
-ignore_words = ['pizza']
-friend_list = ['friend1', 'friend2', 'friend3']
+    session.end()
+    print("MULTI -",instaUser[selection],"finished run at",datetime.datetime.now().strftime("%H:%M:%S"))
 
-# If you want to enter your Instagram Credentials directly just enter
-# username=<your-username-here> and password=<your-password> into InstaPy
-# e.g like so InstaPy(username="instagram", password="test1234")
-
-bot = InstaPy(username=insta_username, password=insta_password, selenium_local_session=False)
-bot.set_selenium_remote_session(selenium_url='http://selenium:4444/wd/hub')
-bot.login()
-bot.set_relationship_bounds(enabled=True,
-             potency_ratio=-1.21,
-              delimit_by_numbers=True,
-               max_followers=4590,
-                max_following=5555,
-                 min_followers=45,
-                  min_following=77)
-bot.set_do_comment(True, percentage=10)
-bot.set_comments(['Cool!', 'Awesome!', 'Nice!'])
-bot.set_dont_include(friend_list)
-bot.set_dont_like(dont_like)
-bot.set_ignore_if_contains(ignore_words)
-bot.like_by_tags(['dog', '#cat'], amount=100)
-bot.end()
+if __name__ == '__main__':        
+    print("MULTI -","Starting at",datetime.datetime.now().strftime("%H:%M:%S"))
+    jobs = []
+    for i in range(len(instaUser)):
+        p = multiprocessing.Process(target=worker, args=(i,))
+        jobs.append(p)
+        p.start()
+        time.sleep(66);#no delay cause some instances of chrome to give errors and stop
