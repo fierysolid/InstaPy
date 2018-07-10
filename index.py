@@ -36,8 +36,8 @@ def worker(selection):
         #print("MULTI -",instaUser[selection],"finished following followers at",datetime.datetime.now().strftime("%H:%M:%S")) 
    
     if smartTags[selection]:
-        session.set_smart_hashtags(smartTags[selection], limit=3, sort='top', log_tags=True)
-        session.like_by_tags(amount=random.randint(2,5), use_smart_hashtags=True)
+        session.set_smart_hashtags(smartTags[selection], limit=5, sort='top', log_tags=True)
+        session.like_by_tags(amount=100, use_smart_hashtags=True)
         print("MULTI -",instaUser[selection],"finished smartTags at",datetime.datetime.now().strftime("%H:%M:%S"))
 
     session.end()
