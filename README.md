@@ -55,6 +55,7 @@ Table of Contents
   * [Like by Locations](#like-by-locations)
   * [Like by Tags](#like-by-tags)
   * [Like by Feeds](#like-by-feeds)
+  * [Mandatory Words](#mandatory-words)
   * [Restricting Likes](#restricting-likes)
   * [Ignoring Users](#ignoring-users)
   * [Ignoring Restrictions](#ignoring-restrictions)
@@ -84,7 +85,8 @@ Table of Contents
   * [Windows Task Scheduler](#windows-task-scheduler)
   * [cron](#cron)
   * [Schedule](#schedule)
-* [Extra Informations](#extra-informations)
+* [Extra Information](#extra-information)  
+  * [Simulation](#simulation)
 
 ## Getting started
 
@@ -246,6 +248,9 @@ session.follow_user_followers(['friend1', 'friend2', 'friend3'], amount=10, rand
 
 session.follow_user_followers(['friend1', 'friend2', 'friend3'], amount=10, randomize=False, sleep_delay=60)
 ```
+> **Note**: [simulation](#simulation) takes place while running this feature.
+
+
 
 ### Follow users that someone else is following
 
@@ -262,6 +267,9 @@ session.follow_user_following(['friend1', 'friend2', 'friend3'], amount=10, rand
 
 session.follow_user_following(['friend1', 'friend2', 'friend3'], amount=10, randomize=False, sleep_delay=60)
 ```
+> **Note**: [simulation](#simulation) takes place while running this feature.
+
+
 
 ### Follow someone else's followers/following
 
@@ -275,6 +283,8 @@ session.set_user_interact(amount=5, randomize=True, percentage=50, media='Photo'
 session.follow_user_followers(['friend1', 'friend2', 'friend3'], amount=10, randomize=False, interact=True)
 ```
 
+
+
 ### Follow by Tags
 
 ```python
@@ -282,6 +292,8 @@ session.follow_user_followers(['friend1', 'friend2', 'friend3'], amount=10, rand
 
 session.follow_by_tags(['tag1', 'tag2'], amount=10)
 ```
+
+
 
 ### Follow the likers of photos of users
 
@@ -304,6 +316,8 @@ session.set_user_interact(amount=2,
                    media='Photo')
 session.follow_likers (['user1' , 'user2'], photos_grab_amount = 2, follow_likers_per_photo = 3, randomize=True, sleep_delay=600, interact=True)
 ```
+
+
 
 ### Follow the commenters of photos of users
 
@@ -328,6 +342,7 @@ session.follow_commenters(['user1', 'user2', 'user3'], amount=100, daysold=365, 
 ```
 
 ### Interact with specific users
+
 ```python
 # Interact with specific users
 # set_do_like, set_do_comment, set_do_follow are applicable
@@ -340,6 +355,7 @@ session.interact_by_users(['user1', 'user2', 'user3'], amount=5, randomize=True,
 ```
 
 ### Interact with users that someone else is following
+
 ```python
 # Interact with the people that a given user is following
 # set_do_comment, set_do_follow and set_do_like are applicable
@@ -351,8 +367,12 @@ session.set_comments(["Cool", "Super!"])
 session.set_do_comment(enabled=True, percentage=80)
 session.interact_user_following(['natgeo'], amount=10, randomize=True)
 ```
+> **Note**: [simulation](#simulation) takes place while running this feature.
+
+
 
 ### Interact with someone else's followers
+
 ```python
 # Interact with the people that a given user is following
 # set_do_comment, set_do_follow and set_do_like are applicable
@@ -364,6 +384,8 @@ session.set_comments(["Cool", "Super!"])
 session.set_do_comment(enabled=True, percentage=80)
 session.interact_user_followers(['natgeo'], amount=10, randomize=True)
 ```
+> **Note**: [simulation](#simulation) takes place while running this feature.
+
 
 
 ### Interact on posts at given URLs
@@ -680,6 +702,15 @@ session.set_smart_hashtags(['cycling', 'roadbike'], limit=3, sort='top', log_tag
 session.like_by_tags(amount=10, use_smart_hashtags=True)
 ```
 
+### Mandatory Words
+
+```python
+session.set_mandatory_words(['#food', '#instafood'])
+```
+
+`.set_mandatory_words` searches the description and owner comments for words and
+will like the image if **all** of those words are in there
+
 ### Restricting Likes
 
 ```python
@@ -780,7 +811,7 @@ Every time you grab `Followers` data in `"full"` range of **any** user, it is al
     + As a **result**, `live_match=False` saves lots of `precious time` and `server requests`.  
 + `live_match=True`:  
     + It will **always** load `live` data from the server at _requested range_.
-    
+
 `store_locally`:  
 Gives the _option_ to `save` the loaded `Followers` data in a **local storage**  
 The files will be saved _into_ your **logs folder**, `~/InstaPy/logs/YourOwnUsername/relationship_data/Popeye/followers/` directory.  
@@ -840,7 +871,7 @@ Every time you grab `Following` data in `"full"` range of **any** user, it is al
     + As a **result**, `live_match=False` saves lots of `precious time` and `server requests`.  
 + `live_match=True`:  
     + It will **always** load `live` data from the server at _requested range_.
-    
+
 `store_locally`:  
 Gives the _option_ to `save` the loaded `Following` data in a **local storage**  
 The files will be saved _into_ your **logs folder**, `~/InstaPy/logs/YourOwnUsername/relationship_data/lazy.smurf/following/` directory.  
@@ -901,7 +932,7 @@ Defines the track to choose a file to compare for `"day"`, `"month"` and `"year"
     + `"first"` selects the first record from the given `day`, `month` or `year`
     + `"median"` selects the median (_the one in the middle_) record from the given `day`, `month` or `year`
     + `"last"` selects the last record from the given `day`, `month` or `year`
-    
+
 `live_match`:  
 Defines the method of grabbing **new** `Followers` data to compare with **existing** data
 > **Knowledge Base**:  
@@ -915,7 +946,7 @@ Every time you grab `Followers` data in `"full"` range of **any** user, it is al
     + As a **result**, `live_match=False` saves lots of `precious time` and `server requests`.  
 + `live_match=True`:  
     + It will **always** load `live` data from the server at _requested range_.
-    
+
 `store_locally`:  
 Gives the _option_ to `save` the loaded `Unfollowers` data in a **local storage**  
 There will be 2 files saved in their own directory:  
@@ -925,7 +956,7 @@ There will be 2 files saved in their own directory:
 + `active_unfollowers`:    
     + Will store only the unfollowers WHOM you are currently following.  
     + Its files will be saved at **logs folder**, `~/InstaPy/logs/YourOwnUsername/relationship_data/Bernard_bear/unfollowers/active_unfollowers/` directory.    
-  
+
 Sample **filename** `03-06-2018~all~75.json`:  
 + `03-06-2018` means the **time** of the data acquisition.
 + `"all"` means that it is all of the unfollowers data;  
@@ -996,7 +1027,7 @@ There are **several** `use cases` of this tool for **various purposes**.
 
     #now Scooby Doo will tell his friend Shaggy about this, who knows, maybe Shaggy will unfollow them all or even add to block :D
     ```  
-  
+
 
 
 ### Pick Fans of a user
@@ -1199,7 +1230,7 @@ session = InstaPy(username='test', password='test', nogui=True)
 
 ## Running on a Headless Browser
 
-**Note:** Chrome only! Must user chromedriver v2.9+
+**Note:** Chrome only! Must use chromedriver v2.9+
 
 Use `headless_browser` parameter to run the bot via the CLI. Works great if running the scripts locally, or to deploy on a server. No GUI, less CPU intensive. [Example](http://g.recordit.co/BhEgXANLhJ.gif)
 
@@ -1368,14 +1399,32 @@ while True:
     time.sleep(1)
 ```
 
-## Extra Informations
 
-#### How not to be banned ?
+
+## Extra Information
+
+
+#### How not to be banned?
 Built-in delays prevent your account from getting banned. (Just make sure you don't like 1000s of post/day)
+
 
 ### Chrome Browser
 
 64-bit system is a requirement for current versions of chrome browser.
+
+
+### Simulation  
+##### During indirect data retrieval, **simulation** happens to provide a _genuine_ activity flow triggered by a wise algorithm.  
+To **turn off** simulation or to **decrease** its occurrence frequency, use `set_simulation` setting:  
+```python
+#use the value of `False` to permanently turn it off
+session.set_simulation(enabled=False)
+
+#use a desired occurrence percentage
+session.set_simulation(enabled=True, percentage=66)
+```
+
+
 
 ---
 ###### Have Fun & Feel Free to report any issues
