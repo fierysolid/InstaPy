@@ -17,9 +17,9 @@ def job():
         import traceback
         print(traceback.format_exc())
 
-schedule.every(10).minutes.do(job)
-# schedule.every().day.at("9:00").do(job)
-# schedule.every().day.at("21:00").do(job)
+# schedule.every(10).minutes.do(job)
+schedule.every().day.at("9:00").do(job)
+schedule.every().day.at("21:00").do(job)
 
 while True:
     schedule.run_pending()
