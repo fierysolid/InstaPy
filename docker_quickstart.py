@@ -16,7 +16,7 @@ def job():
     except:
         import traceback
         print(traceback.format_exc())
-        
+
 schedule.every().day.at("9:00").do(job)
 schedule.every().day.at("21:00").do(job)
 
