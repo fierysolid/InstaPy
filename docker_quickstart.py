@@ -1,26 +1,14 @@
 from instapy import InstaPy
-import schedule
-import time
+insta_username = 'schoennyc'
+insta_password = 'theman'
 
-def job():
-    try:
-        insta_username = 'schoennyc'
-        insta_password = 'theman'
-        smartTags = ['a7sii', 'a7s', 'rokinon', 'sonyalpha', 'atomos', 'film', '35mm']
-        bot = InstaPy(username=insta_username, password=insta_password, selenium_local_session=False)
-        bot.set_selenium_remote_session(selenium_url='http://selenium:4444/wd/hub')
-        bot.login()
-        bot.set_smart_hashtags(smartTags, limit=3, sort='top', log_tags=True)
-        bot.like_by_tags(amount=random.randint(2,5), use_smart_hashtags=True)
-        bot.end()
-    except:
-        import traceback
-        print(traceback.format_exc())
-
-# schedule.every(10).minutes.do(job)
-schedule.every().day.at("9:00").do(job)
-schedule.every().day.at("21:00").do(job)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+bot = InstaPy(username=insta_username, password=insta_password, selenium_local_session=False)
+bot.set_selenium_remote_session(selenium_url='http://selenium:4444/wd/hub')
+bot.login()
+bot.set_relationship_bounds(enabled=True,
+  potency_ratio=-1.21,
+  delimit_by_numbers=True,
+  min_followers=40,
+  min_following=40)
+bot.like_by_tags(['a7sii', 'a7s', 'rokinon', 'sonyalpha', 'atomos', 'film', '35mm'], amount=100)
+bot.end()
