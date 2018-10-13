@@ -1,5 +1,5 @@
 from instapy import InstaPy
-insta_username = 'stal_style'
+insta_username = 'dylan_underwear'
 insta_password = 'Dylan9790'
 
 bot = InstaPy(username=insta_username, password=insta_password, selenium_local_session=False)
