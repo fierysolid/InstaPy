@@ -40,7 +40,8 @@ def job():
         import traceback
         print(traceback.format_exc())
 
-def main():        
+def main():
+    time.sleep(30)
     job()
 
 if __name__ == "__main__":
