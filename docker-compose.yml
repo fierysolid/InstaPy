@@ -12,5 +12,7 @@ services:
     volumes:
       - ./logs:/code/logs
   selenium:
-    image: selenium/standalone-chrome
+    image: selenium/standalone-chrome:3.141.0-actinium
+    ports:
+      - "4444:4444"
     shm_size: 128M
