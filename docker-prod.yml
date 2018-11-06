@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    command: python docker_quickstart.py
+    command: ["./wait-for-selenium.sh", "http://selenium:4444/wd/hub", "--", "python", "docker_quickstart.py"]
     environment:
       - PYTHONUNBUFFERED=0
     build:
@@ -11,8 +11,6 @@ services:
       - selenium
     volumes:
       - ./logs:/code/logs
-    links:
-      - selenium:selenium
   selenium:
     image: selenium/standalone-chrome
     shm_size: 128M
