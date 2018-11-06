@@ -11,6 +11,8 @@ services:
       - selenium
     volumes:
       - ./logs:/code/logs
+    links:
+      - selenium:selenium
   selenium:
     image: selenium/standalone-chrome
     shm_size: 128M
